@@ -1,0 +1,6 @@
+LIBRARY hidebiff
+
+EXPORTS
+	AtEnd
+	AtReceived
+	AtSendReceive

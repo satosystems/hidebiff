@@ -1,0 +1,24 @@
+// Copyright (C) 2006-2009 Satoshi Ogata
+// hidebiff.mac
+// 
+// 2009.08.06:
+//  - このマクロの多くの処理を hidebiff.dll へ移譲
+// 2009.05.23:
+//  - 秀丸メールの受信処理と同時に hidebiff が動作してしまう不具合を改修
+
+loaddll "TKInfo.dll";
+if (!result) {
+	message "このマクロは秀丸メールでしか実行できません。";
+	endmacro;
+}
+
+if (!dllfunc("IsTuruKame")) {
+	message "このマクロは秀丸メールでしか実行できません。";
+	endmacro;
+}
+
+#reason = dllfunc("ReasonMacroStarted");
+
+if (#reason == 4) { // ExecMacro命令によって起動された場合
+	#n = dllfunc("SelectRecvMail");
+}
