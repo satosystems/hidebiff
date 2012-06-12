@@ -12,6 +12,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
@@ -42,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\boost_1_49_0&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -67,13 +70,96 @@
 				AdditionalDependencies="psapi.lib shlwapi.lib"
 				OutputFile="$(OutDir)/hidebiff.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="$(SolutionDir)..\boost_1_49_0\build\x86\boost\bin.v2\libs\regex\build\msvc-9.0\debug\address-model-32\link-static\runtime-link-static\threading-multi"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/hidebiff.pdb"
 				SubSystem="2"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="ver | find &quot;Version 6&quot; &gt; nul&#x0D;&#x0A;if not errorlevel 1 (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;) else (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;)&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\boost_1_49_0&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="0"
+				WarningLevel="4"
+				WarnAsError="false"
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="psapi.lib shlwapi.lib"
+				OutputFile="$(OutDir)/hidebiff.exe"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="$(SolutionDir)..\boost_1_49_0\build\x64\boost\bin.v2\libs\regex\build\msvc-9.0\debug\address-model-64\link-static\runtime-link-static\threading-multi"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(OutDir)/hidebiff.pdb"
+				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -123,7 +209,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\boost_1_49_0&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
@@ -147,7 +233,7 @@
 				AdditionalDependencies="psapi.lib shlwapi.lib"
 				OutputFile="$(OutDir)/hidebiff.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)..\boost_1_49_0\build\x86\boost\bin.v2\libs\regex\build\msvc-9.0\release\address-model-32\link-static\runtime-link-static\threading-multi&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -155,6 +241,88 @@
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="ver | find &quot;Version 6&quot; &gt; nul&#x0D;&#x0A;if not errorlevel 1 (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;) else (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;)&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
+			CharacterSet="2"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\boost_1_49_0&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+				RuntimeLibrary="0"
+				UsePrecompiledHeader="0"
+				WarningLevel="4"
+				WarnAsError="false"
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/NODEFAULTLIB:LIBC"
+				AdditionalDependencies="psapi.lib shlwapi.lib"
+				OutputFile="$(OutDir)/hidebiff.exe"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(SolutionDir)..\boost_1_49_0\build\x64\boost\bin.v2\libs\regex\build\msvc-9.0\release\address-model-64\link-static\runtime-link-static\threading-multi"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -244,7 +412,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"

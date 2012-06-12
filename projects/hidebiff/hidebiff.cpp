@@ -652,7 +652,7 @@ static HANDLE findProcess() {
 		} else {
 			processIDs = (DWORD *)realloc(processIDs, sizeof(DWORD) * defaultSize);
 		}
-		EnumProcesses(processIDs, (DWORD)sizeof(DWORD) * defaultSize, &returnSize);
+		EnumProcesses(processIDs, (DWORD)(sizeof(DWORD) * defaultSize), &returnSize);
 		processNum = returnSize / sizeof(DWORD);
 	} while (processNum > defaultSize);
 
@@ -1955,7 +1955,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                      int) {
 	hInst = hInstance;
 	createWindow();
-	sleep(30000);
 	if (strstr(lpCmdLine, "-r") == lpCmdLine) {
 		const char *work = getWorkDir();
 		string cmd = "\"" + string(work) + "\\hidebiff.exe\" -c " + lpCmdLine;
