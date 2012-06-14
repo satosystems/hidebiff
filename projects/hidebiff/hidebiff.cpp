@@ -613,65 +613,6 @@ BOOL EnablePrivilege(LPTSTR lpszPrivilege, BOOL bEnable)
 }
 
 /**
- * hidebiff.exe のプロセスを検索する。
- *
- * この関数の戻り値のプロセスのハンドルが NULL ではない場合、
- * 呼び出し元が CloseHandle() を使用してハンドルを開放する必要がある。
- *
- * @return プロセスが見つかった場合はハンドル、見つからない場合は NULL
- */
-static HANDLE findProcess() {
-	if (!EnablePrivilege(SE_DEBUG_NAME, TRUE)) {
-		return NULL;
-	}
-	char currentProcessFileName[FILENAME_MAX];
-	size_t defaultSize;	// default size of process id/module list
-
-	GetModuleFileName(NULL, currentProcessFileName, sizeof(currentProcessFileName));
-
-	DWORD *processIDs = NULL;	// list of process id
-	DWORD processNum;			// number of process id list
-	DWORD returnSize;			// size of process id/modulelist
-	HANDLE result = NULL;
-	defaultSize = 100;
-
-	do {
-		defaultSize *= 2;
-		if (processIDs == NULL) {
-			processIDs = (DWORD *)malloc(sizeof(DWORD) * defaultSize);
-		} else {
-			processIDs = (DWORD *)realloc(processIDs, sizeof(DWORD) * defaultSize);
-		}
-		EnumProcesses(processIDs, (DWORD)(sizeof(DWORD) * defaultSize), &returnSize);
-		processNum = returnSize / sizeof(DWORD);
-	} while (processNum > defaultSize);
-
-	// iterate process id list search
-	for (size_t i = 0; i < processNum; i++) {
-		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, false, processIDs[i]);
-		if (hProcess != NULL && processIDs[i] != GetCurrentProcessId()) {
-			HMODULE moduleHandle;
-			DWORD returnSize;
-			char fileName[FILENAME_MAX] = { '\0' };
-			EnumProcessModules(hProcess, &moduleHandle, sizeof(HMODULE), &returnSize);
-
-			// gat file name
-			GetModuleFileNameEx(hProcess, moduleHandle, fileName, sizeof(fileName));
-			if (_stricmp(fileName, currentProcessFileName) == 0) {
-				result = hProcess;
-				break;
-			}
-		}
-		if (hProcess) {
-			CloseHandle(hProcess);
-		}
-	}
-	free(processIDs);
-	return result;
-}
-
-
-/**
  * ini ファイルの初期化を行う。
  */
 static void init(void) {
@@ -1654,7 +1595,7 @@ static void toastNotice(void) {
 			debug("Subject: ");
 			debug(mail.getHeader(L"subject"));
 			debug("\n");
-			debug("</無視したメール>");
+			debug("</無視したメール>\n");
 
 			WaitForSingleObject(hMailsMutex, INFINITE);
 			empty = mails.empty();
@@ -1792,7 +1733,7 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM) {
 	return FALSE;
 }
 
-static HANDLE hSemaphore; ///< 多重起動を防止するためのセマフォハンドル。
+//static HANDLE hSemaphore; ///< 多重起動を防止するためのセマフォハンドル。
 
 /**
  * メイン処理。
@@ -1805,13 +1746,6 @@ static HANDLE hSemaphore; ///< 多重起動を防止するためのセマフォハンドル。
  * @param [in] lpCmdLine コマンドライン引数
  */
 static void mainLoop(LPTSTR lpCmdLine) {
-	WaitForSingleObject(hSemaphore, INFINITE);
-	if (strstr(lpCmdLine, "--debug") != NULL) {
-		Debug = true;
-	}
-#ifdef _DEBUG
-	Debug = true;
-#endif
 	if (strstr(lpCmdLine, "-i") == lpCmdLine) {
 		init();
 	} else if (strstr(lpCmdLine, "-r") == lpCmdLine) {
@@ -1867,24 +1801,6 @@ static void mainLoop(LPTSTR lpCmdLine) {
 	} else if (strstr(lpCmdLine, "-d") == lpCmdLine) {
 		DeleteFile(string(getMailDir()).append("filterlog.txt").c_str());
 	}
-	ReleaseSemaphore(hSemaphore, 1, NULL);
-}
-
-/**
- * 多重起動された際に、後発プロセスがこの関数に処理を委譲し、
- * 最終的には #mainLoop に処理が丸投げされる。
- *
- * @param [in] lpParameter コマンドライン引数
- * @return 常に 0
- */
-static DWORD WINAPI addLaunchStack(LPVOID lpParameter) {
-	char *lpCmdLine = (char *)lpParameter;
-	mainLoop(lpCmdLine);
-	debug("<addLaunchStack>\n");
-	debug(lpCmdLine);
-	debug("\n</addLaunchStack>\n");
-	VirtualFreeEx(GetCurrentProcess(), lpCmdLine, strlen(lpCmdLine) + 1, MEM_DECOMMIT);
-	return 0;
 }
 
 static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
@@ -1943,8 +1859,19 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE,
                      LPTSTR lpCmdLine,
                      int) {
+	if (strstr(lpCmdLine, "--debug") != NULL) {
+		Debug = true;
+	}
+#ifdef _DEBUG
+	Debug = true;
+#endif
+	debug("<Option>\n");
+	debug(lpCmdLine);
+	debug("\n</Option>\n");
+
 	hInst = hInstance;
 	createWindow();
+
 	if (strstr(lpCmdLine, "-r") == lpCmdLine) {
 		const char *work = getWorkDir();
 		string cmd = "\"" + string(work) + "\\hidebiff.exe\" -c " + lpCmdLine;
@@ -1959,15 +1886,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	} else {
 		IniFile::hMutex = CreateMutex(NULL, FALSE, NULL);
 		hMailsMutex = CreateMutex(NULL, FALSE, NULL);
-		hSemaphore = CreateSemaphore(NULL, 1, 1, "hidebiff.exe:Semaphore");
 
 		if (strstr(lpCmdLine, "-c") == lpCmdLine) {
 			lpCmdLine += 3;
 		}
-
-		debug("<WinMain>\n");
-		debug(lpCmdLine);
-		debug("\n</WinMain>\n");
 
 		// ini ファイルが存在するかどうかを調査する
 		// なければ初期設定してもらう
@@ -2030,44 +1952,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 					DialogBox(hInst, (LPCTSTR)IDD_DIALOG1, NULL, (DLGPROC)About);
 				}
 			} else {
-				// 既に起動されていないか確認する
-				HANDLE hMutex = CreateMutex(NULL, TRUE, "hidebiff.exe");
-				debug("hMutex:");
-				debug(reinterpret_cast<size_t>(hMutex));
-				debug("\n");
-				if (!hMutex || GetLastError() == ERROR_ALREADY_EXISTS) {
-					HANDLE hProcess = findProcess();
-					if (hProcess != NULL) {
-						void *pLibRemote = VirtualAllocEx(hProcess, NULL, strlen(lpCmdLine) + 1, MEM_COMMIT, PAGE_READWRITE);
-						if (pLibRemote == NULL) {
-							msgbox("error 20");
-						} else {
-							if (WriteProcessMemory(hProcess, pLibRemote, (void*)lpCmdLine, strlen(lpCmdLine) + 1, NULL) == 0) {
-								msgbox("error 21");
-							} else {
-								HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, addLaunchStack, pLibRemote, 0, NULL);
-								if (hThread == NULL) {
-									msgbox("error 22");
-								}
-								if (strstr(lpCmdLine, "-i") == lpCmdLine) {
-									WaitForSingleObject(hThread, INFINITE);
-								}
-							}
-						}
-						CloseHandle(hProcess);
-					}
-				} else {
-					mainLoop(lpCmdLine);
-					toastNotice();
-				}
+				mainLoop(lpCmdLine);
+				toastNotice();
 			}
 		}
-		WaitForSingleObject(hSemaphore, INFINITE);
 		CloseHandle(IniFile::hMutex);
 		CloseHandle(hMailsMutex);
-		ReleaseSemaphore(hSemaphore, 1, NULL);
-		CloseHandle(hSemaphore);
-		debug("----- END -----\n\n");
 		if (debugout) {
 			fclose(debugout);
 		}
