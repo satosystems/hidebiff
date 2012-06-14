@@ -1,6 +1,9 @@
-// Copyright (C) 2006-2009 Satoshi Ogata
+// Copyright (C) 2006-2012 Satoshi Ogata
 // hidebiff.mac
-// 
+// 2012.06.13:
+//  - 64bit 対応。
+// 2011.12.29:
+//  - hidebiff.dll を廃止し、マクロに実装を復活
 // 2009.08.06:
 //  - このマクロの多くの処理を hidebiff.dll へ移譲
 // 2009.05.23:
@@ -21,4 +24,91 @@ if (!dllfunc("IsTuruKame")) {
 
 if (#reason == 4) { // ExecMacro命令によって起動された場合
 	#n = dllfunc("SelectRecvMail");
+} else if (#reason == 3) {
+	openreg "CURRENTUSER", "Software\\Hidemaruo\\TuruKame\\Config";
+	writeregnum "FilterLog", 0;
+	closereg;
+	#n = dllfunc("EnvChanged");
+	#count = dllfunc("RecvMailCountShow");
+	if (#count > 0) {
+		#limit = getininum(macrodir + "\\hidebiff.ini", "Settings", "LimitCount");
+		if (#count <= #limit) {
+			$path = macrodir + "\\hidebiff.exe -r " + str(#count);
+		} else {
+			openreg "CURRENTUSER", "Software\\Hidemaruo\\TuruKame\\Config";
+			$mailPath = getregstr("TuruKameDir") + "\\TuruKame.exe";
+			closereg;
+			
+			$icon = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "icon");
+			$module = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "module");
+			$effect = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "effect");
+			$position = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "position");
+			$visibirity = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "visibirity");
+			$timeout = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "timeout");
+			$alarm = getinistr(macrodir + "\\hidebiff.ini", "ToastNotify", "alarm");
+			if ($icon == "") {
+				$icon = macrodir + "\\hidebiff.exe,0";
+			}
+			if ($module == "") {
+				$module = macrodir + "\\hidebiff.tnm";
+			}
+			if ($timeout == "") {
+				$timeout = "5";
+			}
+			$path = "\"" + getinistr(macrodir + "\\hidebiff.ini", "Settings", "ToastNotify") + "\"";
+			$path = $path + " /i \"" + $icon + "\"";
+			$path = $path + " /m \"" + $module + "\"";
+			$path = $path + " /o " + $timeout;
+			$path = $path + " /t \"" + str(#count) + "件 受信しました。\"";
+			$path = $path + " /c \"秀丸メール本体で受信したメールを確認してください。\"";
+			$path = $path + " /p \"" + $mailPath + "\"";
+			$path = $path + " /pa \"/x" + macrodir + "\\hidebiff.mac\"";
+			if ($effect != "") {
+				$path = $path + " /e " + $effect;
+			}
+			if ($position != "") {
+				$path = $path + " /ps " + $position;
+			}
+			if ($visibirity != "") {
+				$path = $path + " /v " + $visibirity;
+			}
+			if ($alarm != "") {
+				$path = $path + " /a \"" + $alarm + "\"";
+			}
+		}
+		run $path;
+	}
+} else if (#reason == 6) {
+	#n = dllfunc("GetTransmitCommandCode");
+	if (#n == 40003 ||
+			#n == 40216 ||
+			#n == 40024 ||
+			#n == 40143 ||
+			#n == 40074 ||
+			#n == 40209 ||
+			#n == 1) {
+		#i = 0;
+		while (true) {
+			$account = dllfuncstr("Account", #i);
+			if ($account == "") {
+				break;
+			}
+			#n = dllfunc("LoadAccountProp", $account);
+			#n = dllfunc("SetAccountProp", "fRecvLog", 1);
+			#n = dllfunc("SaveAccountProp");
+			#i = #i + 1;
+		}
+		openreg "CURRENTUSER", "Software\\Hidemaruo\\TuruKame\\Config";
+		writeregnum "FilterLog", 2;
+		closereg;
+		#n = dllfunc("EnvChanged");
+		$path = macrodir + "\\hidebiff.exe -i";
+		run $path;
+	}
+} else if (#reason == 2) {
+	#filterLogSave = getininum(macrodir + "\\hidebiff.ini", "Settings", "FilterLogSave");
+	if (#filterLogSave != 1) {
+		$path = macrodir + "\\hidebiff.exe -d";
+		run $path;
+	}
 }

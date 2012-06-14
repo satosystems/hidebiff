@@ -1,7 +1,5 @@
 /*
- * $Id: hidebiff.cpp 117 2010-08-06 02:30:35Z ogata $
- *
- * Copyright (c) 2006-2010 Satoshi Ogata. All rights reserved.
+ * Copyright (c) 2006-2012 Satoshi Ogata
  */
 
 /*
@@ -368,28 +366,20 @@ static const char *getMailDir(void) {
  */
 static char** getMailAccountDirs(const char *mailDir, int *count) {
 	string subdir_filename(mailDir);
-	subdir_filename.append("\\subdir.bin");
-	char **subdirs;
-
-	char *contents = getFileContents(subdir_filename.c_str(), NULL);
-	string subdir_str = string(contents);
-	free(contents);
+	subdir_filename.append("subdir.bin");
 	vector<string> dirs;
-	istringstream in(subdir_str);
-	while (in) {
-		string subdir;
-		char c;
-		while (in.get(c) && (c != '\r')) {
-			if (c == '\\') break;
-			subdir.push_back(c);
+	char **subdirs;
+	char *contents = getFileContents(subdir_filename.c_str(), NULL);
+	char *ctx;
+	const char *delim = "\r\n";
+	char *next = strtok_s(contents, delim, &ctx);
+	while (next) {
+		if (next[0] != '\\') {
+			dirs.push_back(string(next));
 		}
-		if (c == '\\') break;
-		while (in.get(c) && (c != '\n')) subdir.push_back(c);
-
-		if (subdir.length() != 0) {
-        	dirs.push_back(subdir);
-		}
+		next = strtok_s(NULL, delim, &ctx);
 	}
+	free(contents);
 	*count = (int)dirs.size();
 	if (*count) {
 		subdirs = (char **)malloc(sizeof(char *) * *count);

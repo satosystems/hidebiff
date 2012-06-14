@@ -98,7 +98,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="ver | find &quot;Version 6&quot; &gt; nul&#x0D;&#x0A;if not errorlevel 1 (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;) else (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;)&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
@@ -262,7 +262,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="ver | find &quot;Version 6&quot; &gt; nul&#x0D;&#x0A;if not errorlevel 1 (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;%appdata%\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;) else (&#x0D;&#x0A;copy &quot;$(ProjectDir)$(TargetName).mac&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;copy &quot;$(TargetPath)&quot; &quot;C:\Users\ogata\AppData\Roaming\Hidemaruo\Hidemaru\Macro&quot;&#x0D;&#x0A;)&#x0D;&#x0A;"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration

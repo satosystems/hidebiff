@@ -67,9 +67,9 @@ CAPTION "hidebiffについて"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,69,69,50,14
-    LTEXT           "hidebiff バージョン 1.2.7",IDC_STATIC,62,24,101,8
+    LTEXT           "hidebiff バージョン 1.2.8",IDC_STATIC,62,24,101,8
     ICON            IDI_ICON1,IDC_STATIC,14,14,20,20
-    CTEXT           "Copyright (C) 2006-2010 Satoshi Ogata",IDC_STATIC,10,48,165,8
+    CTEXT           "Copyright (C) 2006-2012 Satoshi Ogata",IDC_STATIC,10,48,165,8
 END
 
 
@@ -98,8 +98,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,2,7,0
- PRODUCTVERSION 1,2,7,0
+ FILEVERSION 1,2,8,0
+ PRODUCTVERSION 1,2,8,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -115,12 +115,12 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription", "hidebiff"
-            VALUE "FileVersion", "1, 2, 7, 0"
+            VALUE "FileVersion", "1, 2, 8, 0"
             VALUE "InternalName", "hidebiff"
-            VALUE "LegalCopyright", "Copyright (C) 2006-2010 Satoshi Ogata"
+            VALUE "LegalCopyright", "Copyright (C) 2006-2012 Satoshi Ogata"
             VALUE "OriginalFilename", "hidebiff.exe"
             VALUE "ProductName", "hidebiff"
-            VALUE "ProductVersion", "1, 2, 7, 0"
+            VALUE "ProductVersion", "1, 2, 8, 0"
         END
     END
     BLOCK "VarFileInfo"
