@@ -1,7 +1,7 @@
 // Copyright (C) 2006-2012 Satoshi Ogata
 // hidebiff.mac
 // 2012.06.13:
-//  - 64bit 対応。
+//  - 64bit 対応
 // 2011.12.29:
 //  - hidebiff.dll を廃止し、マクロに実装を復活
 // 2009.08.06:

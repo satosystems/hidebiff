@@ -55,7 +55,7 @@ static HINSTANCE hInst;
 static const char *getWorkDir(void);
 
 /**
- * デバッグ出力を行なう
+ * デバッグ出力を行なう。
  *
  * 引数 msg が NULL なら何も行なわない。
  * msg が NULL ではなく、デバッグ出力用ファイルポインタ #debugout が NULL なら
@@ -1560,10 +1560,9 @@ static void toastNotice(void) {
 	free(inivalue);
 
 	WaitForSingleObject(hMailsMutex, INFINITE);
-	bool empty = mails.empty();
 	ReleaseMutex(hMailsMutex);
 	debug("<toastNotice>\n");
-	while (!empty) {
+	while (!mails.empty()) {
 		WaitForSingleObject(hMailsMutex, INFINITE);
 		debug("totalReceiveMail:");
 		debug(totalReceivedMail);
@@ -1598,7 +1597,6 @@ static void toastNotice(void) {
 			debug("</無視したメール>\n");
 
 			WaitForSingleObject(hMailsMutex, INFINITE);
-			empty = mails.empty();
 			ReleaseMutex(hMailsMutex);
 			continue;
 		}
@@ -1698,7 +1696,6 @@ static void toastNotice(void) {
 		CloseHandle(pi.hProcess);
 
 		WaitForSingleObject(hMailsMutex, INFINITE);
-		empty = mails.empty();
 		ReleaseMutex(hMailsMutex);
 	}
 	debug("</toastNotice>\n");
@@ -1732,8 +1729,6 @@ LRESULT CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM) {
 	}
 	return FALSE;
 }
-
-//static HANDLE hSemaphore; ///< 多重起動を防止するためのセマフォハンドル。
 
 /**
  * メイン処理。
@@ -1795,7 +1790,6 @@ static void mainLoop(LPTSTR lpCmdLine) {
 			}
 			if ((GetWindowLong(hWnd, GWL_EXSTYLE) & WS_EX_TOPMOST) != WS_EX_TOPMOST) {
 				SetWindowPos(hWnd, HWND_TOP, 0, 0, 0, 0, SWP_DEFERERASE | SWP_NOSENDCHANGING | SWP_NOMOVE | SWP_NOSIZE);
-//				SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 			}
 		}
 	} else if (strstr(lpCmdLine, "-d") == lpCmdLine) {

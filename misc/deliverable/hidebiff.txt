@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------
 yƒ}ƒNƒ–¼zhidebiff
-y“o ˜^ –¼zhidebiff127.zip
+y“o ˜^ –¼zhidebiff128.zip
 y§ìŽÒ–¼z•û‘ <satosystems@gmail.com>
-y“®ìŠÂ‹«zGŠÛƒ[ƒ‹ Ver.5.23 ˆÈã
+y“®ìŠÂ‹«zGŠÛƒ[ƒ‹ Ver.5.77 ˆÈã
 yŒö ŠJ “úz2008/03/31
 yì¬•û–@zZIP Œ`Ž®‚É‚Äˆ³k
 y Ží  •Ê zƒtƒŠ[ƒEƒFƒA
@@ -10,6 +10,8 @@
 -----------------------------------------------------------------------------
 y‚Í‚¶‚ß‚Éz
 Biff ‚Æ‚Í—X•ÖŽó‚¯‚ÉŽèŽ†‚ª“Í‚­‚Æ–i‚¦‚éŒ¢‚Ì–¼‘O‚ÅAUNIX ‚Í‚à‚Æ‚æ‚è Windows ‚Å‚àƒ[ƒ‹‚Ì“ž’…‚ð’m‚ç‚¹‚Ä‚­‚ê‚éƒvƒƒOƒ‰ƒ€‚Ì–¼‘O‚ÉŽg—p‚³‚ê‚Ü‚·B‚±‚Ìƒ}ƒNƒ‚Íu‚Ð‚Å‚Ñ‚Óv‚Æ”­‰¹‚µAGŠÛƒ[ƒ‹ƒ†[ƒU‚Éƒ[ƒ‹‚Ì“ž’…‚ð’Ê’m‚µ‚Ü‚·B
+
+ƒo[ƒWƒ‡ƒ“ 1.2.8 ‚©‚ç 32bit/64bit ‚»‚ê‚¼‚ê‚ÌGŠÛƒ[ƒ‹‚Å“®ì‚·‚é‚æ‚¤‚É‚È‚è‚Ü‚µ‚½B
 
 hidebiff ‚Í ToastNotify ‚Æ‚¢‚¤ŠO•”ƒc[ƒ‹‚ðŽg—p‚µ‚Ü‚·B
 
@@ -19,10 +21,9 @@ http://gertrud.jp/soft/toastnotify.html
 
 
 y ²Ý½Ä°Ù z
-hidebiff.zip ‚ð“WŠJ‚·‚é‚ÆAˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ªì¬‚³‚ê‚Ü‚·B
+hidebiffxxx.zip ‚ð“WŠJ‚·‚é‚ÆAˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ªì¬‚³‚ê‚Ü‚·B
 
 Ehidebiff.exe  - ŽÀsƒtƒ@ƒCƒ‹
-Ehidebiff.dll  - Ž©“®‹N“®‘Î‰ž DLL
 Ehidebiff.mac  - •â•ƒ}ƒNƒ
 Ehidebiff.mht  - ƒCƒ“ƒXƒg[ƒ‹•û–@‚È‚Ç‚ÌÚ×‚Èà–¾
 Ehidebiff.tnm  - ToastNotify —pƒ‚ƒWƒ…[ƒ‹
@@ -35,7 +36,7 @@ hidebiff.zip ‚ð“WŠJ‚·‚é‚ÆAˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ªì¬‚³‚ê‚Ü‚·B
 hidebiff ‚ÍƒŒƒWƒXƒgƒŠ‚ðŽg—p‚µ‚Ä‚¢‚Ü‚¹‚ñBƒAƒ“ƒCƒ“ƒXƒg[ƒ‹‚ÍGŠÛƒ[ƒ‹‚Ìƒ}ƒNƒ—pƒtƒHƒ‹ƒ_‚É‚ ‚éˆÈ‰º‚Ìƒtƒ@ƒCƒ‹‚ðíœ‚µ‚Ä‚­‚¾‚³‚¢B
 
 Ehidebiff.exe
-Ehidebiff.dll
+Ehidebiff.dlli‚ ‚ê‚Îj
 Ehidebiff.inii‚ ‚ê‚Îj
 Ehidebiff.mac
 Ehidebiff.mht
@@ -43,6 +44,7 @@ hidebiff ‚ÍƒŒƒWƒXƒgƒŠ‚ðŽg—p‚µ‚Ä‚¢‚Ü‚¹‚ñBƒAƒ“ƒCƒ“ƒXƒg[ƒ‹‚ÍGŠÛƒ[ƒ‹‚Ìƒ}ƒNƒ—pƒ
 Ehidebiff.txt
 
 hidebiff.ini ‚Íƒ}ƒNƒ—pƒtƒHƒ‹ƒ_‚ÉŽ©“®¶¬‚³‚ê‚Ü‚·B¶¬‚³‚ê‚Ä‚¢‚éê‡‚Í“¯Žž‚Éíœ‚µ‚Ä‚­‚¾‚³‚¢B
+hidebiff.dll ‚Íƒo[ƒWƒ‡ƒ“ 1.2.7 ˆÈ‘O‚ÅŽg—p‚µ‚Ä‚¢‚½ƒtƒ@ƒCƒ‹‚ÅAƒo[ƒWƒ‡ƒ“ 1.2.8 ˆÈ~‚É‚ÍŠÜ‚Ü‚ê‚Ü‚¹‚ñB
 ƒ}ƒNƒ“o˜^‚ð‰ðœ‚µ‚Ä‚­‚¾‚³‚¢B
 •K—v‚É‰ž‚¶‚ÄGŠÛƒ[ƒ‹‚ÌÝ’è‚ðŒ³‚É–ß‚µ‚Ä‚­‚¾‚³‚¢B
 
@@ -74,8 +76,15 @@ http://gertrud.jp/soft/toastnotify.html
 
 hidebiff ‚ÌƒAƒCƒRƒ“‚Í‚±‚Æ‚¿‚³‚ñì‚ÌuŽÄŒ¢ƒƒ{v‚æ‚èì¬‚³‚¹‚Ä‚¢‚½‚¾‚«‚Ü‚µ‚½B‚±‚Ìê‚ðŽØ‚è‚Ä‚¨—ç\‚µã‚°‚Ü‚·B
 
+yŠ„‚èØ‚èz
+ƒo[ƒWƒ‡ƒ“ 1.2.8 Œ»ÝAU‚è•ª‚¯ðŒ‚Å”ñ’Ê’mÝ’è‚µ‚Ä‚¢‚éƒ[ƒ‹‚àƒg[ƒXƒg•\Ž¦‚³‚ê‚Ä‚µ‚Ü‚¤BŽŸ‰ñˆÈ~‚Ìƒo[ƒWƒ‡ƒ“ƒAƒbƒv‚ÅC³‚ðŒŸ“¢‚·‚éB
+
 
 yXV—š—ðz
+E2012/07/20 Version 1.2.8
+64bit”Å‚Å“®ì‚·‚é‚æ‚¤‚ÉC³B
+•¡”‚Ìƒ[ƒ‹ƒAƒJƒEƒ“ƒg‚ðŽg—p‚µ‚Ä‚¢‚éê‡‚É‰Šú‰»‚ÉŽ¸”s‚·‚é‰Â”\«‚ª‚ ‚éŒÂŠ‚ðC³B
+
 E2010/12/24 Version 1.2.7
 ˆê•”‚ÌŠÂ‹«‚Åƒg[ƒXƒg‚ðƒNƒŠƒbƒN‚µ‚Ä‚àƒ[ƒ‹‚ª•\Ž¦‚³‚ê‚È‚¢‚±‚Æ‚ª‚ ‚é•s‹ï‡‚ðC³B
 ƒg[ƒXƒgƒNƒŠƒbƒN‚Å‚Ìƒ[ƒ‹•\Ž¦Žž‚ÉA‚Å‚«‚é‚¾‚¯GŠÛƒ[ƒ‹‚ðÄ‘O–Ê‚É•\Ž¦‚³‚¹‚é‚æ‚¤‚É‰ü‘PB
